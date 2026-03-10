@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análisis Matemático · Apuntes 2º Bachillerato</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --white: #ffffff;
+    --ink: #1a1917;
+    --muted: #6b6860;
+    --border: #e5e3de;
+    --border2: #d0cec9;
+
+    /* accent palette — análisis */
+    --v1: #0369a1;   /* límites — sky */
+    --v1l: #e0f2fe;
+    --v2: #059669;   /* continuidad — emerald */
+    --v2l: #d1fae5;
+    --v3: #7c3aed;   /* derivadas — purple */
+    --v3l: #ede9fe;
+    --v4: #d97706;   /* integrales — amber */
+    --v4l: #fef3c7;
+    --v5: #dc2626;   /* aplicaciones — red */
+    --v5l: #fee2e2;
+
+    --formula-bg: #f5f3f0;
+    --highlight: #fef08a;
+    --r: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  @media print {
+    body { background: white; }
+    .page { box-shadow: none; margin: 0; border-radius: 0; }
+    .no-print { display: none; }
+  }
+
+  body {
+    background: #ede9e4;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .cover {
+    max-width: 900px;
+    margin: 32px auto 0;
+    background: var(--ink);
+    border-radius: var(--r);
+    padding: 40px 48px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+  }
+  .cover-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, #bfdbfe 40%, #a5f3fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .cover-sub {
+    color: #9ca3af;
+    font-size: .85rem;
+    margin-top: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .cover-index {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 220px;
+  }
+  .idx-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: .78rem;
+    color: #d1d5db;
+  }
+  .idx-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 20px auto;
+    background: var(--white);
+    border-radius: var(--r);
+    padding: 36px 42px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  }
+
+  /* ── SECTION HEADERS ── */
+  .sec-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid currentColor;
+  }
+  .sec-num {
+    width: 28px; height: 28px;
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: .85rem; flex-shrink: 0;
+    color: white;
+  }
+  .sec-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    text-transform: uppercase;
+  }
+
+  /* ── GRID LAYOUTS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--formula-bg);
+    border-radius: 8px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: .7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .def-box {
+    background: var(--formula-bg);
+    border-left: 3px solid var(--border2);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    margin: 8px 0;
+    font-size: .88rem;
+  }
+
+  .formula-box {
+    background: var(--formula-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+    margin: 6px 0;
+  }
+
+  .highlight-box {
+    background: var(--highlight);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: .82rem;
+    border: 1px solid #fde047;
+  }
+
+  /* ── TABLE ── */
+  .ops-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .83rem;
+  }
+  .ops-table th {
+    background: var(--formula-bg);
+    padding: 6px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .ops-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .ops-table tr:last-child td { border-bottom: none; }
+
+  /* ── METHODS ── */
+  .method-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 10px; }
+  .method-card {
+    border-radius: 8px;
+    padding: 14px;
+    border: 1px solid var(--border);
+  }
+  .method-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: .72rem; font-weight: 700; color: white;
+    margin-bottom: 8px; flex-shrink: 0;
+  }
+  .method-name {
+    font-weight: 600;
+    font-size: .82rem;
+    margin-bottom: 6px;
+  }
+  .method-steps {
+    list-style: none;
+    font-size: .77rem;
+    color: var(--muted);
+    line-height: 1.65;
+    counter-reset: step;
+  }
+  .method-steps li { counter-increment: step; }
+  .method-steps li::before {
+    content: counter(step) '.';
+    font-weight: 600;
+    margin-right: 4px;
+    color: var(--ink);
+  }
+
+  /* ── VIDEOS / QR ── */
+  .videos-section { margin-top: 14px; }
+  .video-sec-title {
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .video-sec-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+    gap: 10px;
+  }
+  .video-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .video-qr {
+    width: 72px; height: 72px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .video-label {
+    font-size: .65rem;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.35;
+    max-width: 95px;
+  }
+  .video-url {
+    font-size: .6rem;
+    color: #0284c7;
+    font-family: 'JetBrains Mono', monospace;
+    text-decoration: none;
+    word-break: break-all;
+    text-align: center;
+  }
+
+  /* ── MISC ── */
+  .subsec {
+    font-size: .75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--muted);
+    margin: 14px 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .subsec::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .66rem;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  p { margin: 4px 0; font-size: .88rem; }
+  small { font-size: .78rem; color: var(--muted); }
+  .sep { height: 1px; background: var(--border); margin: 16px 0; }
+
+  .equiv-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: .83rem;
+  }
+  .equiv-list li::before {
+    content: '▸';
+    margin-right: 6px;
+    color: var(--muted);
+    font-size: .75rem;
+  }
+
+  /* ── STEP FLOW (para pasos de un algoritmo) ── */
+  .step-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: .82rem;
+  }
+  .step-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .step-badge {
+    min-width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: white;
+    font-size: .7rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── INDETERMINATIONS TABLE ── */
+  .indet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .indet-card {
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    text-align: center;
+    font-size: .82rem;
+  }
+  .indet-form {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .85rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .indet-solve {
+    font-size: .72rem;
+    color: var(--muted);
+  }
+
+  /* ── PRINT BUTTON ── */
+  .print-btn {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--ink); color: white;
+    border: none; border-radius: 50px;
+    padding: 10px 20px; font-size: .82rem;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer; z-index: 100;
+    box-shadow: 0 4px 16px rgba(0,0,0,.25);
+    transition: transform .15s;
+  }
+  .print-btn:hover { transform: translateY(-2px); }
+
+  @media (max-width: 700px) {
+    .page { padding: 20px; }
+    .grid-2, .grid-3, .method-grid { grid-template-columns: 1fr; }
+    .cover { flex-direction: column; }
+    .video-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨 Imprimir / PDF</button>
+
+<!-- ═══════════════════════════════════════════ PORTADA -->
+<div class="cover">
+  <div>
+    <div class="cover-title">Análisis<br>Matemático</div>
+    <div class="cover-sub">2º Bachillerato · PAU · Cálculo</div>
+    <div style="margin-top:18px; font-size:.78rem; color:rgba(255,255,255,.75); line-height:1.7">
+      <div style="font-weight:600; color:white; font-size:.82rem">María Bravo Conde</div>
+      <div>Docente · IES Santa Eulalia</div>
+      <div style="margin-top:6px; display:flex; align-items:center; gap:6px">
+        <svg width="18" height="18" viewBox="0 0 24 24" style="flex-shrink:0" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
+          <path d="M12 2a10 10 0 0 1 0 20M12 2a10 10 0 0 0 0 20M2 12h20" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
+          <path d="M12 2c2.5 3 4 6.5 4 10s-1.5 7-4 10M12 2c-2.5 3-4 6.5-4 10s1.5 7 4 10" stroke="rgba(255,255,255,.7)" stroke-width="1.5"/>
+        </svg>
+        <span style="font-size:.74rem">Licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" style="color:white; font-weight:600; text-decoration:underline">CC BY-NC-SA 4.0</a> · Libre para uso educativo no comercial con atribución</span>
+      </div>
+    </div>
+  </div>
+  <div class="cover-index">
+    <div class="idx-item"><span class="idx-dot" style="background:#38bdf8"></span>① Límites y continuidad</div>
+    <div class="idx-item"><span class="idx-dot" style="background:#a78bfa"></span>② Derivadas</div>
+    <div class="idx-item"><span class="idx-dot" style="background:#34d399"></span>③ Estudio completo de funciones</div>
+    <div class="idx-item"><span class="idx-dot" style="background:#fbbf24"></span>④ Integrales</div>
+    <div class="idx-item"><span class="idx-dot" style="background:#f87171"></span>⑤ Áreas y aplicaciones</div>
+    <div style="margin-top:16px; border-top:1px solid rgba(255,255,255,.2); padding-top:12px; display:flex; flex-direction:column; gap:10px">
+
+      <!-- QR Calculadora GeoGebra -->
+      <div style="background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:10px; padding:10px 14px; display:flex; align-items:center; gap:12px">
+        <div id="qr-geogebra" style="flex-shrink:0; background:white; border-radius:6px; padding:3px; width:62px; height:62px; display:flex; align-items:center; justify-content:center;"></div>
+        <div>
+          <div style="font-size:.75rem; font-weight:700; color:white; margin-bottom:3px">📐 Calculadora de funciones</div>
+          <div style="font-size:.7rem; color:rgba(255,255,255,.8); line-height:1.5; margin-bottom:4px">GeoGebra — Estudio gráfico interactivo</div>
+          <a href="https://www.geogebra.org/m/p2vqhen2" target="_blank" style="font-size:.67rem; color:#a5f3fc; text-decoration:underline; font-family:monospace">geogebra.org/m/p2vqhen2</a>
+        </div>
+      </div>
+
+      <!-- QR App IA -->
+      <div style="background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-radius:10px; padding:10px 14px; display:flex; align-items:center; gap:12px">
+        <div id="qr-app-analisis" style="flex-shrink:0; background:white; border-radius:6px; padding:3px; width:62px; height:62px; display:flex; align-items:center; justify-content:center;"></div>
+        <div>
+          <div style="font-size:.75rem; font-weight:700; color:white; margin-bottom:3px">🤖 Práctica con IA — Análisis PAU</div>
+          <div style="font-size:.7rem; color:rgba(255,255,255,.8); line-height:1.5; margin-bottom:4px">156 ejercicios · tutora IA · corrección de fotos</div>
+          <a href="https://m4r14bravo.github.io/app_ia_analisis_2bachillerato/" target="_blank" style="font-size:.67rem; color:#a5f3fc; text-decoration:underline; font-family:monospace">m4r14bravo.github.io/app_ia_analisis_2bachillerato</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ 1. LÍMITES Y CONTINUIDAD -->
+<div class="page">
+  <div class="sec-header" style="color:var(--v1)">
+    <div class="sec-num" style="background:var(--v1)">①</div>
+    <div class="sec-title">Límites y Continuidad</div>
+  </div>
+
+  <div class="grid-2">
+    <!-- Propiedades límites -->
+    <div>
+      <div class="subsec">Propiedades operativas</div>
+      <table class="ops-table">
+        <tr><th>Regla</th><th>Expresión</th></tr>
+        <tr><td>Suma / resta</td><td>\(\lim(f \pm g) = L \pm M\)</td></tr>
+        <tr><td>Producto</td><td>\(\lim(f \cdot g) = L \cdot M\)</td></tr>
+        <tr><td>Cociente</td><td>\(\lim\dfrac{f}{g} = \dfrac{L}{M},\ M \ne 0\)</td></tr>
+        <tr><td>Potencia</td><td>\(\lim f^n = L^n\)</td></tr>
+        <tr><td>Composición</td><td>\(\lim f(g(x)) = f(M)\) si \(f\) continua</td></tr>
+      </table>
+
+      <div class="subsec" style="margin-top:14px">Límites en el infinito — funciones racionales</div>
+      <div class="card">
+        <div class="card-title">Grado numerador vs. denominador</div>
+        <div class="step-flow">
+          <div class="step-row">
+            <div class="step-badge">›</div>
+            <div><strong>gr(num) &lt; gr(den)</strong> → límite \(= 0\)</div>
+          </div>
+          <div class="step-row">
+            <div class="step-badge">›</div>
+            <div><strong>gr(num) = gr(den)</strong> → cociente coefs. líderes</div>
+          </div>
+          <div class="step-row">
+            <div class="step-badge">›</div>
+            <div><strong>gr(num) > gr(den)</strong> → \(\pm\infty\) (estudiar signo)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Indeterminaciones -->
+    <div>
+      <div class="subsec">Indeterminaciones principales</div>
+      <div class="indet-grid">
+        <div class="indet-card" style="background:var(--v1l); border-color:#7dd3fc">
+          <div class="indet-form">\(\dfrac{0}{0}\)</div>
+          <div class="indet-solve">Factorizar · L'Hôpital</div>
+        </div>
+        <div class="indet-card" style="background:var(--v1l); border-color:#7dd3fc">
+          <div class="indet-form">\(\dfrac{\infty}{\infty}\)</div>
+          <div class="indet-solve">Dividir por \(x^n\) · L'Hôpital</div>
+        </div>
+        <div class="indet-card" style="background:var(--v3l); border-color:#6ee7b7">
+          <div class="indet-form">\(\infty - \infty\)</div>
+          <div class="indet-solve">Conjugado · MCM</div>
+        </div>
+        <div class="indet-card" style="background:var(--v4l); border-color:#fcd34d">
+          <div class="indet-form">\(0 \cdot \infty\)</div>
+          <div class="indet-solve">Reescribir como \(\frac{0}{0}\) o \(\frac{\infty}{\infty}\)</div>
+        </div>
+        <div class="indet-card" style="background:var(--v5l); border-color:#fca5a5">
+          <div class="indet-form">\(1^\infty\)</div>
+          <div class="indet-solve">\(e^{\lim(f-1)\cdot g}\)</div>
+        </div>
+        <div class="indet-card" style="background:var(--v5l); border-color:#fca5a5">
+          <div class="indet-form">\(0^0,\,\infty^0\)</div>
+          <div class="indet-solve">Logaritmo + L'Hôpital</div>
+        </div>
+      </div>
+
+      <div class="subsec" style="margin-top:14px">Regla de L'Hôpital</div>
+      <div class="def-box" style="border-left-color:var(--v1)">
+        Si \(\lim\frac{f}{g}\) es \(\frac{0}{0}\) o \(\frac{\infty}{\infty}\), entonces:
+        $$\lim_{x\to a}\frac{f(x)}{g(x)} = \lim_{x\to a}\frac{f'(x)}{g'(x)}$$
+        <small>Aplicar mientras persista la indeterminación. No es la regla del cociente.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- Continuidad -->
+  <div class="subsec">Continuidad en un punto</div>
+  <div class="grid-3">
+    <div class="card" style="border-left:3px solid var(--v2)">
+      <div class="card-title">Condición</div>
+      <p>\(f\) es continua en \(a\) si:</p>
+      <div class="step-flow" style="margin-top:8px">
+        <div class="step-row"><div class="step-badge" style="background:var(--v2)">1</div><div>\(f(a)\) existe (definida)</div></div>
+        <div class="step-row"><div class="step-badge" style="background:var(--v2)">2</div><div>\(\lim_{x\to a}f(x)\) existe</div></div>
+        <div class="step-row"><div class="step-badge" style="background:var(--v2)">3</div><div>\(\lim_{x\to a}f(x) = f(a)\)</div></div>
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--v4)">
+      <div class="card-title">Tipos de discontinuidad</div>
+      <ul class="equiv-list" style="margin-top:4px">
+        <li><strong>Evitable:</strong> \(\lim f\) existe pero \(\lim f \ne f(a)\)</li>
+        <li><strong>Salto finito:</strong> límites laterales distintos y finitos</li>
+        <li><strong>Salto infinito:</strong> algún límite lateral es \(\pm\infty\)</li>
+        <li><strong>Esencial:</strong> no existe el límite</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--v5)">
+      <div class="card-title">Teoremas clave</div>
+      <p><strong>Bolzano:</strong> Si \(f\) continua en \([a,b]\) y \(f(a)\cdot f(b) < 0\), \(\exists\, c\in(a,b)\) con \(f(c)=0\).</p>
+      <p style="margin-top:6px"><strong>Darboux:</strong> Si \(f\) continua en \([a,b]\), toma todos los valores entre \(f(a)\) y \(f(b)\).</p>
+    </div>
+  </div>
+
+</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ 2. DERIVADAS -->
+<div class="page">
+  <div class="sec-header" style="color:var(--v3)">
+    <div class="sec-num" style="background:var(--v3)">②</div>
+    <div class="sec-title">Derivadas</div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="subsec">Derivadas elementales</div>
+      <table class="ops-table">
+        <tr><th>Función</th><th>Derivada</th></tr>
+        <tr><td>\(k\) (constante)</td><td>\(0\)</td></tr>
+        <tr><td>\(x^n\)</td><td>\(n\,x^{n-1}\)</td></tr>
+        <tr><td>\(\sqrt{x} = x^{1/2}\)</td><td>\(\dfrac{1}{2\sqrt{x}}\)</td></tr>
+        <tr><td>\(\dfrac{1}{x^n} = x^{-n}\)</td><td>\(-n\,x^{-n-1}\)</td></tr>
+        <tr><td>\(e^x\)</td><td>\(e^x\)</td></tr>
+        <tr><td>\(a^x\)</td><td>\(a^x\ln a\)</td></tr>
+        <tr><td>\(\ln x\)</td><td>\(\dfrac{1}{x}\)</td></tr>
+        <tr><td>\(\log_a x\)</td><td>\(\dfrac{1}{x\ln a}\)</td></tr>
+        <tr><td>\(\sin x\)</td><td>\(\cos x\)</td></tr>
+        <tr><td>\(\cos x\)</td><td>\(-\sin x\)</td></tr>
+        <tr><td>\(\tan x\)</td><td>\(\dfrac{1}{\cos^2 x} = 1+\tan^2 x\)</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="subsec">Reglas de derivación</div>
+      <div class="card">
+        <div class="card-title">Suma, producto, cociente, cadena</div>
+        <div class="formula-box">\((f \pm g)' = f' \pm g'\)</div>
+        <div class="formula-box">\((f \cdot g)' = f'g + fg'\)</div>
+        <div class="formula-box">\(\left(\dfrac{f}{g}\right)' = \dfrac{f'g - fg'}{g^2}\)</div>
+        <div class="formula-box" style="background:var(--v3l); border-color:#c4b5fd">
+          \([f(g(x))]' = f'(g(x))\cdot g'(x)\)
+          <div style="font-size:.7rem; color:var(--muted); margin-top:3px">Regla de la cadena</div>
+        </div>
+      </div>
+
+      <div class="subsec" style="margin-top:14px">Derivación logarítmica</div>
+      <div class="def-box" style="border-left-color:var(--v3)">
+        Para \(y = f(x)^{g(x)}\): aplicar \(\ln\) en ambos lados, derivar implícitamente.
+        <div class="formula-box" style="margin-top:8px">\(y' = f(x)^{g(x)}\left[g'(x)\ln f(x) + g(x)\dfrac{f'(x)}{f(x)}\right]\)</div>
+      </div>
+
+      <div class="subsec" style="margin-top:14px">Interpretación geométrica</div>
+      <div class="card">
+        <div class="card-title">Recta tangente y normal en \(x_0\)</div>
+        <div class="formula-box">\(\text{tangente:}\quad y - f(x_0) = f'(x_0)(x - x_0)\)</div>
+        <div class="formula-box" style="margin-top:4px">\(\text{normal:}\quad y - f(x_0) = \dfrac{-1}{f'(x_0)}(x - x_0)\)</div>
+        <small>Si \(f'(x_0)=0\): tangente horizontal, normal vertical.</small>
+      </div>
+    </div>
+  </div>
+
+</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ 3. ESTUDIO DE FUNCIÓN -->
+<div class="page">
+  <div class="sec-header" style="color:var(--v2)">
+    <div class="sec-num" style="background:var(--v2)">③</div>
+    <div class="sec-title">Estudio Completo de Funciones</div>
+  </div>
+
+  <div class="highlight-box" style="margin-bottom:16px">
+    <strong>Protocolo PAU:</strong> Dominio → Simetrías → Cortes con ejes → Asíntotas → Crecimiento y extremos → Concavidad e inflexión → Gráfica
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="subsec">Dominio habitual</div>
+      <table class="ops-table">
+        <tr><th>Tipo</th><th>Restricción</th></tr>
+        <tr><td>Polinomio</td><td>\(\mathbb{R}\)</td></tr>
+        <tr><td>Racional \(\frac{P}{Q}\)</td><td>\(Q(x) \ne 0\)</td></tr>
+        <tr><td>Raíz par \(\sqrt[2n]{f}\)</td><td>\(f(x)\geq 0\)</td></tr>
+        <tr><td>Logaritmo \(\ln f\)</td><td>\(f(x) > 0\)</td></tr>
+        <tr><td>Función a trozos</td><td>Unión de intervalos</td></tr>
+      </table>
+
+      <div class="subsec" style="margin-top:14px">Crecimiento y extremos con \(f'(x)\)</div>
+      <div class="card">
+        <div class="step-flow">
+          <div class="step-row"><div class="step-badge" style="background:var(--v2)">1</div><div>Calcular \(f'(x)\) y resolver \(f'(x) = 0\) → puntos críticos</div></div>
+          <div class="step-row"><div class="step-badge" style="background:var(--v2)">2</div><div>\(f'(x)>0 \Rightarrow\) creciente · \(f'(x)<0 \Rightarrow\) decreciente</div></div>
+          <div class="step-row"><div class="step-badge" style="background:var(--v2)">3</div><div><strong>Criterio 2ª derivada:</strong> si \(f'(a)=0\):<br>
+            \(f''(a)<0\) → máximo local<br>
+            \(f''(a)>0\) → mínimo local<br>
+            \(f''(a)=0\) → analizar signo de \(f'\)</div></div>
+        </div>
+      </div>
+
+      <div class="subsec" style="margin-top:14px">Concavidad e inflexión con \(f''(x)\)</div>
+      <div class="card">
+        <div class="step-flow">
+          <div class="step-row"><div class="step-badge" style="background:var(--v3)">1</div><div>Calcular \(f''(x)\) y resolver \(f''(x) = 0\) → candidatos a inflexión</div></div>
+          <div class="step-row"><div class="step-badge" style="background:var(--v3)">2</div><div>\(f''(x)>0 \Rightarrow\) cóncava ∪ · \(f''(x)<0 \Rightarrow\) convexa ∩</div></div>
+          <div class="step-row"><div class="step-badge" style="background:var(--v3)">3</div><div>Punto de inflexión: cambia el signo de \(f''\). Comprobar siempre.</div></div>
+        </div>
+      </div>
+
+      <div class="subsec" style="margin-top:14px">Optimización</div>
+      <div class="def-box" style="border-left-color:var(--v2)">
+        <ol class="method-steps" style="margin-left:4px">
+          <li>Expresar la magnitud a maximizar/minimizar: \(f(x)\)</li>
+          <li>Identificar la restricción y reducir a una variable</li>
+          <li>Resolver \(f'(x)=0\) y verificar con \(f''\) o tabla de signo</li>
+          <li>Comprobar extremos del dominio si es intervalo cerrado</li>
+        </ol>
+      </div>
+    </div>
+
+    <div>
+      <div class="subsec">Asíntotas</div>
+      <div class="card">
+        <div class="card-title">Vertical — \(x = a\)</div>
+        <p>Cuando \(\lim_{x\to a^\pm} f(x) = \pm\infty\). Candidatos: puntos fuera del dominio.</p>
+      </div>
+      <div class="card" style="margin-top:8px">
+        <div class="card-title">Horizontal — \(y = L\)</div>
+        <div class="formula-box">\(\lim_{x\to+\infty} f(x) = L_1 \qquad \lim_{x\to-\infty} f(x) = L_2\)</div>
+        <p style="margin-top:6px">Si \(L_1 \in \mathbb{R}\): asíntota horizontal en \(+\infty\). Si \(L_2 \in \mathbb{R}\): asíntota horizontal en \(-\infty\). <strong>Pueden ser distintas o existir solo en uno de los lados.</strong></p>
+      </div>
+      <div class="card" style="margin-top:8px">
+        <div class="card-title">Oblicua — \(y = mx + n\)</div>
+        <div class="formula-box">\(m = \lim_{x\to\pm\infty}\dfrac{f(x)}{x}, \quad n = \lim_{x\to\pm\infty}[f(x)-mx]\)</div>
+        <p style="margin-top:6px">Calcular <strong>por separado en \(+\infty\) y en \(-\infty\)</strong>. Solo existe si no hay asíntota horizontal en ese lado.</p>
+      </div>
+      <div class="highlight-box" style="margin-top:8px">
+        ⚠️ <strong>Atención (cuando la función no es racional):</strong> que exista asíntota por un lado no implica que exista por el otro. Ejemplo clásico: \(e^x\) tiene asíntota horizontal \(y=0\) cuando \(x\to-\infty\), pero no cuando \(x\to+\infty\). <strong>Estudiar siempre ambos lados de forma independiente.</strong>
+      </div>
+    </div>
+  </div>
+
+</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ 4. INTEGRALES -->
+<div class="page">
+  <div class="sec-header" style="color:var(--v4)">
+    <div class="sec-num" style="background:var(--v4)">④</div>
+    <div class="sec-title">Integrales</div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="subsec">Integrales inmediatas</div>
+      <table class="ops-table">
+        <tr><th>Función</th><th>\(\int f\,dx\)</th></tr>
+        <tr><td>\(k\)</td><td>\(kx + C\)</td></tr>
+        <tr><td>\(x^n\ (n \ne -1)\)</td><td>\(\dfrac{x^{n+1}}{n+1} + C\)</td></tr>
+        <tr><td>\(\dfrac{1}{x}\)</td><td>\(\ln|x| + C\)</td></tr>
+        <tr><td>\(e^x\)</td><td>\(e^x + C\)</td></tr>
+        <tr><td>\(a^x\)</td><td>\(\dfrac{a^x}{\ln a} + C\)</td></tr>
+        <tr><td>\(\sin x\)</td><td>\(-\cos x + C\)</td></tr>
+        <tr><td>\(\cos x\)</td><td>\(\sin x + C\)</td></tr>
+        <tr><td>\(\dfrac{1}{\cos^2 x}\)</td><td>\(\tan x + C\)</td></tr>
+        <tr><td>\(\dfrac{f'(x)}{f(x)}\)</td><td>\(\ln|f(x)| + C\)</td></tr>
+        <tr><td>\(f'(x)\cdot[f(x)]^n\)</td><td>\(\dfrac{[f(x)]^{n+1}}{n+1} + C\)</td></tr>
+      </table>
+    </div>
+
+    <div>
+      <div class="subsec">Métodos de integración</div>
+
+      <!-- Sustitución -->
+      <div class="method-card" style="border-left:3px solid var(--v3); margin-bottom:10px">
+        <div class="method-name">① Cambio de variable (sustitución)</div>
+        <p style="font-size:.8rem; color:var(--muted); margin-bottom:8px">Usar cuando el integrando es un producto en el que una función es <em>casi</em> la derivada de la otra, salvo por alguna constante que no cuadra. También cuando el enunciado lo indica explícitamente.</p>
+        <ol class="method-steps">
+          <li>Elegir \(u = g(x)\) → calcular \(du = g'(x)\,dx\)</li>
+          <li>Sustituir para obtener \(\int h(u)\,du\)</li>
+          <li>Integrar y deshacer el cambio</li>
+        </ol>
+        <div class="formula-box" style="margin-top:8px; font-size:.8rem">
+          \(\displaystyle\int f(g(x))\cdot g'(x)\,dx \xrightarrow{u=g(x)} \int f(u)\,du\)
+        </div>
+      </div>
+
+      <!-- Por partes ALPES -->
+      <div class="method-card" style="border-left:3px solid var(--v4)">
+        <div class="method-name">② Integración por partes — <span class="tag" style="background:var(--v4l); color:var(--v4)">ALPES</span></div>
+        <p style="font-size:.8rem; color:var(--muted); margin-bottom:8px">Usar cuando el integrando es un producto de funciones que no tienen ninguna relación entre sí: ninguna se parece remotamente a la derivada de la otra. Ejemplo clásico: \(\int e^x(x^2+1)\,dx\).</p>
+        <div class="formula-box">\(\int u\,dv = u\cdot v - \int v\,du\)</div>
+        <div class="card" style="margin-top:8px; background:var(--v4l)">
+          <div class="card-title">Orden de prioridad para elegir \(u\)</div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:4px">
+            <span class="tag" style="background:var(--v4); color:white">A — Arco (arcsin, arctan)</span>
+            <span class="tag" style="background:var(--v4); color:white">L — Logaritmos</span>
+            <span class="tag" style="background:var(--v4); color:white">P — Polinomios</span>
+            <span class="tag" style="background:var(--v4); color:white">E — Exponenciales</span>
+            <span class="tag" style="background:var(--v4); color:white">S — Seno/coseno</span>
+          </div>
+          <small style="display:block; margin-top:6px">El primero que aparezca en la lista es \(u\). El resto es \(dv\).</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- Fracciones simples + Barrow -->
+  <div class="grid-2">
+    <div>
+      <div class="subsec">Fracciones simples (racionales)</div>
+      <div class="def-box" style="border-left-color:var(--v1)">
+        Si gr(num) ≥ gr(den): dividir primero.<br><br>
+        Factorizar el denominador y descomponer:
+        $$\frac{P(x)}{(x-a)(x-b)} = \frac{A}{x-a} + \frac{B}{x-b}$$
+        Integrar cada fracción por separado: resultado con \(\ln|x-a|\).
+      </div>
+    </div>
+    <div>
+      <div class="subsec">Integral definida — Regla de Barrow</div>
+      <div class="formula-box" style="font-size:1rem; padding:14px">
+        $$\int_a^b f(x)\,dx = \Big[F(x)\Big]_a^b = F(b) - F(a)$$
+      </div>
+      <div class="card" style="margin-top:8px">
+        <div class="card-title">Propiedades</div>
+        <ul class="equiv-list" style="font-size:.8rem">
+          <li>\(\int_a^a f = 0\)</li>
+          <li>\(\int_a^b f = -\int_b^a f\)</li>
+          <li>\(\int_a^b f = \int_a^c f + \int_c^b f\)</li>
+          <li>Linealidad: \(\int(\alpha f + \beta g) = \alpha\int f + \beta\int g\)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ 5. ÁREAS Y APLICACIONES -->
+<div class="page">
+  <div class="sec-header" style="color:var(--v5)">
+    <div class="sec-num" style="background:var(--v5)">⑤</div>
+    <div class="sec-title">Áreas y Aplicaciones de la Integral</div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="subsec">Área bajo una curva</div>
+      <div class="def-box" style="border-left-color:var(--v5)">
+        Si \(f(x) \geq 0\) en \([a,b]\):
+        $$A = \int_a^b f(x)\,dx$$
+        Si \(f\) cambia de signo: <strong>dividir el intervalo</strong> en los ceros y sumar los valores absolutos:
+        $$A = \left|\int_a^c f\right| + \left|\int_c^b f\right|$$
+      </div>
+
+      <div class="subsec" style="margin-top:14px">Área entre dos curvas</div>
+      <div class="def-box" style="border-left-color:var(--v4)">
+        Si \(f(x) \geq g(x)\) en \([a,b]\):
+        $$A = \int_a^b [f(x) - g(x)]\,dx$$
+        Los límites \(a\), \(b\) se obtienen igualando \(f(x) = g(x)\).
+      </div>
+      <div class="highlight-box" style="margin-top:8px">
+        ⚠️ Si las curvas se cruzan en el interior, calcular por tramos y estudiar qué función está por encima en cada tramo para realizar la resta en el orden adecuado.
+      </div>
+    </div>
+
+    <div>
+      <div class="subsec">Volumen de revolución (alrededor del eje X)</div>
+      <div class="formula-box" style="font-size:1rem; padding:12px">
+        $$V = \pi\int_a^b [f(x)]^2\,dx$$
+      </div>
+      <div class="card" style="margin-top:8px">
+        <div class="card-title">Si se gira el área entre dos curvas</div>
+        <div class="formula-box">\(V = \pi\displaystyle\int_a^b \left([f(x)]^2 - [g(x)]^2\right)dx\)</div>
+        <small>Con \(f(x) \geq g(x) \geq 0\) en \([a,b]\).</small>
+      </div>
+
+      <div class="subsec" style="margin-top:14px">Función primitiva con condición inicial</div>
+      <div class="def-box" style="border-left-color:var(--v3)">
+        Si \(G'(x) = f(x)\) y se conoce \(G(a) = k\):
+        $$G(x) = \int f(x)\,dx + C, \quad C = k - F(a)$$
+        Es decir: integrar, sustituir el punto dado y despejar \(C\).
+      </div>
+
+      <div class="subsec" style="margin-top:14px">Protocolo general PAU — áreas</div>
+      <div class="step-flow">
+        <div class="step-row"><div class="step-badge" style="background:var(--v5)">1</div><div>Identificar las curvas y bosquejar el recinto</div></div>
+        <div class="step-row"><div class="step-badge" style="background:var(--v5)">2</div><div>Calcular los puntos de corte: \(f(x)=g(x)\)</div></div>
+        <div class="step-row"><div class="step-badge" style="background:var(--v5)">3</div><div>Determinar qué curva queda por encima en cada tramo</div></div>
+        <div class="step-row"><div class="step-badge" style="background:var(--v5)">4</div><div>Integrar en cada tramo (decidiendo en qué orden restar, para que los resultados sean positivos) y sumar los resultados de cada integral</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recursos -->
+  <div class="sep"></div>
+  <div class="grid-2">
+
+    <!-- QR Calculadora GeoGebra -->
+    <div>
+      <div class="subsec">Calculadora interactiva</div>
+      <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:10px; padding:16px 18px; display:flex; align-items:center; gap:14px">
+        <div id="qr-geogebra-body" style="flex-shrink:0; background:white; border-radius:6px; padding:3px; width:72px; height:72px; display:flex; align-items:center; justify-content:center; border:1px solid var(--border)"></div>
+        <div>
+          <div style="font-weight:700; font-size:.9rem; margin-bottom:4px">📐 GeoGebra — Calculadora de funciones</div>
+          <div style="font-size:.78rem; color:var(--muted); margin-bottom:6px">Estudia cualquier función: dominio, derivadas, integrales, áreas</div>
+          <a href="https://www.geogebra.org/m/p2vqhen2" target="_blank" style="font-size:.72rem; color:#0284c7; font-family:monospace; text-decoration:underline">geogebra.org/m/p2vqhen2</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- QR App IA -->
+    <div>
+      <div class="subsec">Práctica con IA</div>
+      <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:16px 18px; display:flex; align-items:center; gap:14px">
+        <div id="qr-app-body" style="flex-shrink:0; background:white; border-radius:6px; padding:3px; width:72px; height:72px; display:flex; align-items:center; justify-content:center; border:1px solid var(--border)"></div>
+        <div>
+          <div style="font-weight:700; font-size:.9rem; margin-bottom:4px">🤖 App IA — Análisis PAU</div>
+          <div style="font-size:.78rem; color:var(--muted); margin-bottom:6px">156 ejercicios PAU · tutora IA · sube tu foto para corrección</div>
+          <a href="https://m4r14bravo.github.io/app_ia_analisis_2bachillerato/" target="_blank" style="font-size:.72rem; color:#d97706; font-family:monospace; text-decoration:underline">m4r14bravo.github.io/app_ia_analisis</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+  </div>
+</div>
+
+
+<!-- PIE -->
+<div style="max-width:900px; margin: 0 auto 40px; padding:16px 20px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; font-size:.72rem; color:#9ca3af">
+  <div>
+    <span style="font-weight:600; color:#6b7280">María Bravo Conde</span> · Docente · IES Santa Eulalia<br>
+    Análisis Matemático · 2º Bachillerato PAU
+  </div>
+  <div style="text-align:right">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" style="color:#9ca3af; text-decoration:underline">CC BY-NC-SA 4.0</a> · Libre para uso educativo no comercial con atribución
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const items = [
+    // Portada
+    { id: 'qr-geogebra',      url: 'https://www.geogebra.org/m/p2vqhen2' },
+    { id: 'qr-app-analisis',  url: 'https://m4r14bravo.github.io/app_ia_analisis_2bachillerato/' },
+    // Sección áreas
+    { id: 'qr-geogebra-body', url: 'https://www.geogebra.org/m/p2vqhen2' },
+    { id: 'qr-app-body',      url: 'https://m4r14bravo.github.io/app_ia_analisis_2bachillerato/' },
+
+    // Vídeos §3 Estudio función
+
+
+
+
+  ];
+
+  items.forEach(function(v) {
+    var el = document.getElementById(v.id);
+    if (el && typeof QRCode !== 'undefined') {
+      var big = (v.id === 'qr-geogebra' || v.id === 'qr-app-analisis' || v.id === 'qr-geogebra-body' || v.id === 'qr-app-body');
+      var size = big ? 56 : 68;
+      new QRCode(el, {
+        text: v.url, width: size, height: size,
+        colorDark: '#1a1917', colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
