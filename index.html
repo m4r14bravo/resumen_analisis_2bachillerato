@@ -139,7 +139,7 @@
   .card {
     background: var(--formula-bg);
     border-radius: 8px;
-    padding: 14px 16px;
+    padding: 11px 14px;
     border: 1px solid var(--border);
   }
   .card-title {
@@ -457,11 +457,11 @@
 </div>
 
 
-<!-- ═══════════════════════════════════════════ 1. LÍMITES Y CONTINUIDAD -->
+<!-- ═══════════════════════════════════════════ 1. CONTINUIDAD Y DERIVABILIDAD -->
 <div class="page">
   <div class="sec-header" style="color:var(--v1)">
     <div class="sec-num" style="background:var(--v1)">①</div>
-    <div class="sec-title">Límites y Continuidad</div>
+    <div class="sec-title">Continuidad y Derivabilidad</div>
   </div>
 
   <div class="grid-2">
@@ -477,7 +477,7 @@
         <tr><td>Composición</td><td>\(\lim f(g(x)) = f(M)\) si \(f\) continua</td></tr>
       </table>
 
-      <div class="subsec" style="margin-top:14px">Límites en el infinito — funciones racionales</div>
+      <div class="subsec" style="margin-top:10px">Límites en el infinito — funciones racionales</div>
       <div class="card">
         <div class="card-title">Grado numerador vs. denominador</div>
         <div class="step-flow">
@@ -487,7 +487,7 @@
           </div>
           <div class="step-row">
             <div class="step-badge">›</div>
-            <div><strong>gr(num) = gr(den)</strong> → cociente coefs. líderes</div>
+            <div><strong>gr(num) = gr(den)</strong> → cociente coefs. principales</div>
           </div>
           <div class="step-row">
             <div class="step-badge">›</div>
@@ -527,7 +527,7 @@
         </div>
       </div>
 
-      <div class="subsec" style="margin-top:14px">Regla de L'Hôpital</div>
+      <div class="subsec" style="margin-top:10px">Regla de L'Hôpital</div>
       <div class="def-box" style="border-left-color:var(--v1)">
         Si \(\lim\frac{f}{g}\) es \(\frac{0}{0}\) o \(\frac{\infty}{\infty}\), entonces:
         $$\lim_{x\to a}\frac{f(x)}{g(x)} = \lim_{x\to a}\frac{f'(x)}{g'(x)}$$
@@ -540,7 +540,7 @@
 
   <!-- Continuidad -->
   <div class="subsec">Continuidad en un punto</div>
-  <div class="grid-3">
+  <div style="display:grid; grid-template-columns:1fr 2fr; gap:14px">
     <div class="card" style="border-left:3px solid var(--v2)">
       <div class="card-title">Condición</div>
       <p>\(f\) es continua en \(a\) si:</p>
@@ -552,22 +552,164 @@
     </div>
     <div class="card" style="border-left:3px solid var(--v4)">
       <div class="card-title">Tipos de discontinuidad</div>
-      <ul class="equiv-list" style="margin-top:4px">
-        <li><strong>Evitable:</strong> \(\lim f\) existe pero \(\lim f \ne f(a)\)</li>
-        <li><strong>Salto finito:</strong> límites laterales distintos y finitos</li>
-        <li><strong>Salto infinito:</strong> algún límite lateral es \(\pm\infty\)</li>
-        <li><strong>Esencial:</strong> no existe el límite</li>
-      </ul>
-    </div>
-    <div class="card" style="border-left:3px solid var(--v5)">
-      <div class="card-title">Teoremas clave</div>
-      <p><strong>Bolzano:</strong> Si \(f\) continua en \([a,b]\) y \(f(a)\cdot f(b) < 0\), \(\exists\, c\in(a,b)\) con \(f(c)=0\).</p>
-      <p style="margin-top:6px"><strong>Darboux:</strong> Si \(f\) continua en \([a,b]\), toma todos los valores entre \(f(a)\) y \(f(b)\).</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 18px; margin-top:6px">
+        <div><strong>Evitable:</strong> \(\lim f\) existe pero \(\lim f \ne f(a)\)</div>
+        <div><strong>Salto finito:</strong> límites laterales distintos y finitos</div>
+        <div><strong>Salto infinito:</strong> algún límite lateral es \(\pm\infty\)</div>
+        <div><strong>Esencial:</strong> no existe el límite</div>
+      </div>
     </div>
   </div>
 
-</div>
+  <div class="sep"></div>
+
+  <div class="grid-2" style="gap:10px">
+    <div>
+      <div class="subsec">Derivabilidad en un punto</div>
+      <div class="card" style="border-left:3px solid var(--v3)">
+        <div class="card-title">Definición</div>
+        <p>\(f\) es derivable en \(a\) si existe el límite:</p>
+        <div class="formula-box" style="margin-top:6px">\(f'(a) = \lim_{h\to 0}\dfrac{f(a+h)-f(a)}{h}\)</div>
+        <p style="margin-top:6px; font-size:.8rem; color:var(--muted)">Equivalentemente: los límites laterales del cociente incremental existen y son iguales (derivadas laterales iguales).</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--v5); margin-top:8px">
+        <div class="card-title">Relación continuidad–derivabilidad</div>
+        <p>Derivable en \(a\) \(\Rightarrow\) continua en \(a\).</p>
+        <p style="margin-top:5px; font-size:.8rem; color:var(--muted)">El recíproco es falso: \(|x|\) es continua en \(0\) pero no derivable (pico anguloso). Una función discontinua en \(a\) no puede ser derivable en \(a\).</p>
+      </div>
+      <div class="highlight-box" style="margin-top:8px; font-size:.8rem">
+        <strong>Protocolo para funciones a trozos:</strong> (1) comprobar continuidad en el punto de unión · (2) si es continua, calcular las derivadas laterales · (3) si son iguales, es derivable
+      </div>
+    </div>
+    <div>
+      <div class="subsec">Continuidad y derivabilidad en un intervalo</div>
+      <div class="card" style="border-left:3px solid var(--v2)">
+        <div class="card-title">Continuidad en un intervalo</div>
+        <ul class="equiv-list" style="font-size:.82rem; margin-top:4px">
+          <li><strong>Intervalo abierto \((a,b)\):</strong> continua en todos sus puntos interiores</li>
+          <li><strong>Intervalo cerrado \([a,b]\):</strong> continua en \((a,b)\) y, además, continua por la derecha en \(a\) y por la izquierda en \(b\)</li>
+        </ul>
+      </div>
+      <div class="card" style="border-left:3px solid var(--v3); margin-top:8px">
+        <div class="card-title">Derivabilidad en un intervalo abierto</div>
+        <p style="font-size:.82rem">\(f\) es derivable en \((a,b)\) si es derivable en todos sus puntos interiores.</p>
+        <p style="margin-top:5px; font-size:.78rem; color:var(--muted)">Las funciones elementales (polinomios, exponenciales, logaritmos, trigonométricas) son derivables en todo su dominio. Las funciones irracionales pueden no serlo en los puntos que anulan el radicando.</p>
+      </div>
+    </div>
   </div>
+
+
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════ 1b. TEOREMAS -->
+<div class="page">
+  <div class="sec-header" style="color:var(--v1)">
+    <div class="sec-num" style="background:var(--v1); font-size:.7rem">①b</div>
+    <div class="sec-title">Teoremas</div>
+  </div>
+
+  <div class="subsec">Funciones continuas</div>
+  <div class="grid-2" style="gap:10px; margin-bottom:14px">
+    <div class="card" style="border-left:4px solid #ca8a04; background:var(--highlight)">
+      <div class="card-title" style="color:#92400e">⭐ Teorema de Bolzano</div>
+      <svg width="100%" height="88" viewBox="0 0 280 88" preserveAspectRatio="none" style="display:block; margin:8px 0 8px; border:1px solid #fde047; border-radius:7px; background:white">
+        <line x1="12" y1="52" x2="268" y2="52" stroke="#888" stroke-width="1.2"/>
+        <polygon points="268,49 273,52 268,55" fill="#888"/>
+        <line x1="12" y1="83" x2="12" y2="6" stroke="#888" stroke-width="1.2"/>
+        <polygon points="9,6 12,1 15,6" fill="#888"/>
+        <text x="274" y="55" font-size="8" fill="#888">x</text>
+        <text x="4" y="7" font-size="8" fill="#888">y</text>
+        <path d="M35,74 C70,72 110,64 140,52 C165,42 200,22 245,16" fill="none" stroke="#92400e" stroke-width="2"/>
+        <circle cx="35" cy="52" r="2.5" fill="#92400e"/>
+        <circle cx="245" cy="52" r="2.5" fill="#92400e"/>
+        <circle cx="140" cy="52" r="3.5" fill="#dc2626"/>
+        <line x1="140" y1="20" x2="140" y2="82" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
+        <circle cx="35" cy="74" r="2.5" fill="#1d4ed8"/>
+        <circle cx="245" cy="16" r="2.5" fill="#059669"/>
+        <line x1="12" y1="74" x2="35" y2="74" stroke="#1d4ed8" stroke-width="0.8" stroke-dasharray="2,2"/>
+        <line x1="12" y1="16" x2="245" y2="16" stroke="#059669" stroke-width="0.8" stroke-dasharray="2,2"/>
+        <text x="32" y="84" font-size="8" fill="#92400e">a</text>
+        <text x="137" y="84" font-size="8" fill="#dc2626">c</text>
+        <text x="242" y="84" font-size="8" fill="#92400e">b</text>
+        <text x="15" y="72" font-size="7.5" fill="#1d4ed8">f(a)&lt;0</text>
+        <text x="15" y="14" font-size="7.5" fill="#059669">f(b)&gt;0</text>
+        <text x="144" y="48" font-size="7.5" fill="#dc2626" font-weight="bold">f(c)=0</text>
+      </svg>
+      <p style="margin:0">Si \(f\) es continua en \([a,b]\) y \(f(a)\cdot f(b) < 0\) (signos opuestos), entonces \(\exists\, c \in (a,b)\) tal que \(f(c)=0\).</p>
+      <p style="margin-top:5px; font-size:.78rem; color:var(--muted)">Garantiza la existencia de al menos una raíz en el intervalo.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--v2)">
+      <div class="card-title" style="color:var(--v2)">Teorema de Weierstrass</div>
+      <p>Si \(f\) es continua en \([a,b]\), entonces alcanza en él un máximo absoluto y un mínimo absoluto.</p>
+      <p style="margin-top:5px; font-size:.78rem; color:var(--muted)">No dice dónde están: pueden estar en el interior (extremo relativo) o en los extremos del intervalo.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--v3)">
+      <div class="card-title" style="color:var(--v3)">Teorema de Darboux (valores intermedios)</div>
+      <p>Si \(f\) es continua en \([a,b]\) y \(k\) es cualquier valor entre \(f(a)\) y \(f(b)\), entonces \(\exists\, c \in [a,b]\) con \(f(c)=k\).</p>
+      <p style="margin-top:5px; font-size:.78rem; color:var(--muted)">Una función continua toma todos los valores intermedios entre sus extremos.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--v4)">
+      <div class="card-title" style="color:var(--v4)">Propiedad de conservación de signo</div>
+      <p>Si \(f\) es continua y no nula en \(a\), existe un entorno de \(a\) en el que \(f\) mantiene el mismo signo que en \(a\).</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--v5)">
+      <div class="card-title" style="color:var(--v5)">Teorema de Acotación</div>
+      <p>Si \(f\) es continua en \([a,b]\), entonces está acotada en ese intervalo (\(\exists\, M\) tal que \(|f(x)| \leq M\) para todo \(x \in [a,b]\)).</p>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <div class="subsec">Funciones derivables</div>
+  <div class="grid-3" style="gap:10px">
+    <div class="card" style="border-left:4px solid #ca8a04; background:var(--highlight)">
+      <div class="card-title" style="color:#92400e">⭐ Teorema de Rolle</div>
+      <svg width="100%" height="88" viewBox="0 0 280 88" preserveAspectRatio="none" style="display:block; margin:8px 0 8px; border:1px solid #fde047; border-radius:7px; background:white">
+        <line x1="12" y1="72" x2="268" y2="72" stroke="#888" stroke-width="1.2"/>
+        <polygon points="268,69 273,72 268,75" fill="#888"/>
+        <line x1="12" y1="83" x2="12" y2="6" stroke="#888" stroke-width="1.2"/>
+        <polygon points="9,6 12,1 15,6" fill="#888"/>
+        <text x="274" y="75" font-size="8" fill="#888">x</text>
+        <text x="4" y="7" font-size="8" fill="#888">y</text>
+        <!-- curva parabólica simétrica: máximo exacto en (140,14) -->
+        <path d="M30,62 Q140,-34 250,62" fill="none" stroke="#92400e" stroke-width="2"/>
+        <!-- puntos a y b a la misma altura y=62 -->
+        <circle cx="30" cy="62" r="2.5" fill="#92400e"/>
+        <circle cx="250" cy="62" r="2.5" fill="#92400e"/>
+        <!-- línea horizontal f(a)=f(b) -->
+        <line x1="12" y1="62" x2="258" y2="62" stroke="#92400e" stroke-width="0.8" stroke-dasharray="3,2"/>
+        <!-- punto c = máximo exacto (140,14) -->
+        <circle cx="140" cy="14" r="3.5" fill="#dc2626"/>
+        <!-- línea vertical en c -->
+        <line x1="140" y1="6" x2="140" y2="80" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,2"/>
+        <!-- tangente horizontal: y=14, pasa exactamente por el máximo -->
+        <line x1="108" y1="14" x2="172" y2="14" stroke="#dc2626" stroke-width="2"/>
+        <!-- etiquetas -->
+        <text x="27" y="83" font-size="8" fill="#92400e">a</text>
+        <text x="247" y="83" font-size="8" fill="#92400e">b</text>
+        <text x="137" y="83" font-size="8" fill="#dc2626">c</text>
+        <text x="15" y="60" font-size="7.5" fill="#92400e">f(a)=f(b)</text>
+        <text x="145" y="12" font-size="7.5" fill="#dc2626" font-weight="bold">f'(c)=0</text>
+      </svg>
+      <p style="margin:0">Si \(f\) es continua en \([a,b]\), derivable en \((a,b)\) y \(f(a)=f(b)\), entonces \(\exists\, c \in (a,b)\) tal que \(f'(c)=0\).</p>
+      <p style="margin-top:5px; font-size:.78rem; color:var(--muted)">Existe al menos un punto con tangente horizontal. Útil para demostrar que una ecuación no tiene más de una solución en un intervalo.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--v2)">
+      <div class="card-title" style="color:var(--v2)">Teorema de Lagrange (valor medio)</div>
+      <p>Si \(f\) es continua en \([a,b]\) y derivable en \((a,b)\), entonces \(\exists\, c \in (a,b)\) tal que:</p>
+      <div class="formula-box" style="margin-top:6px">\(f'(c) = \dfrac{f(b)-f(a)}{b-a}\)</div>
+      <p style="margin-top:5px; font-size:.78rem; color:var(--muted)">Existe un punto donde la tangente es paralela a la secante que une los extremos del intervalo.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--v1)">
+      <div class="card-title" style="color:var(--v1)">Teorema de Cauchy (valor medio generalizado)</div>
+      <p>Si \(f\) y \(g\) son continuas en \([a,b]\) y derivables en \((a,b)\), entonces \(\exists\, c \in (a,b)\) tal que:</p>
+      <div class="formula-box" style="margin-top:6px">\(\dfrac{f'(c)}{g'(c)} = \dfrac{f(b)-f(a)}{g(b)-g(a)}\)</div>
+      <p style="margin-top:5px; font-size:.78rem; color:var(--muted)">Generalización de Lagrange. Rolle es un caso particular de Lagrange.</p>
+    </div>
+  </div>
+
 </div>
 
 
@@ -579,6 +721,7 @@
   </div>
 
   <div class="grid-2">
+    <!-- COL IZQUIERDA: tabla + interpretación geométrica -->
     <div>
       <div class="subsec">Derivadas elementales</div>
       <table class="ops-table">
@@ -595,7 +738,40 @@
         <tr><td>\(\cos x\)</td><td>\(-\sin x\)</td></tr>
         <tr><td>\(\tan x\)</td><td>\(\dfrac{1}{\cos^2 x} = 1+\tan^2 x\)</td></tr>
       </table>
+
+      <div class="subsec" style="margin-top:10px">Interpretación geométrica</div>
+      <div style="display:flex; gap:10px; align-items:flex-start">
+        <svg width="120" height="110" viewBox="0 0 120 110" style="flex-shrink:0; border:1px solid var(--border); border-radius:8px; background:var(--formula-bg)">
+          <line x1="10" y1="95" x2="115" y2="95" stroke="#888" stroke-width="1.2"/>
+          <line x1="10" y1="95" x2="10" y2="8" stroke="#888" stroke-width="1.2"/>
+          <polygon points="115,92 120,95 115,98" fill="#888"/>
+          <polygon points="7,8 10,3 13,8" fill="#888"/>
+          <text x="116" y="98" font-size="8" fill="#888">x</text>
+          <text x="3" y="7" font-size="8" fill="#888">y</text>
+          <path d="M15,80 C30,60 55,25 105,20" fill="none" stroke="#059669" stroke-width="2"/>
+          <text x="90" y="17" font-size="8" fill="#059669">f</text>
+          <circle cx="55" cy="40" r="3.5" fill="#0369a1"/>
+          <line x1="25" y1="64" x2="85" y2="16" stroke="#0369a1" stroke-width="1.5"/>
+          <text x="86" y="14" font-size="8" fill="#0369a1">t</text>
+          <line x1="35" y1="14" x2="80" y2="70" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <text x="82" y="70" font-size="8" fill="#dc2626">n</text>
+          <line x1="55" y1="40" x2="55" y2="95" stroke="#888" stroke-width="0.8" stroke-dasharray="2,2"/>
+          <text x="51" y="103" font-size="8" fill="#888">x₀</text>
+          <text x="12" y="108" font-size="7" fill="#0369a1">m=f'(x₀)</text>
+          <text x="60" y="108" font-size="7" fill="#dc2626">m=−1/f'</text>
+        </svg>
+        <div style="flex:1">
+          <div class="card" style="padding:8px 10px">
+            <div class="card-title" style="font-size:.78rem">Recta tangente y normal en \(x_0\)</div>
+            <div class="formula-box" style="font-size:.8rem; padding:5px 8px">\(t:\; y - f(x_0) = f'(x_0)(x - x_0)\)</div>
+            <div class="formula-box" style="font-size:.8rem; padding:5px 8px; margin-top:4px">\(n:\; y - f(x_0) = \dfrac{-1}{f'(x_0)}(x - x_0)\)</div>
+            <small style="font-size:.7rem">Si \(f'(x_0)=0\): tangente horizontal, normal vertical.</small>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- COL DERECHA: reglas + logarítmica + implícita -->
     <div>
       <div class="subsec">Reglas de derivación</div>
       <div class="card">
@@ -609,24 +785,23 @@
         </div>
       </div>
 
-      <div class="subsec" style="margin-top:14px">Derivación logarítmica</div>
+      <div class="subsec" style="margin-top:10px">Derivación logarítmica</div>
       <div class="def-box" style="border-left-color:var(--v3)">
         Para \(y = f(x)^{g(x)}\): aplicar \(\ln\) en ambos lados, derivar implícitamente.
         <div class="formula-box" style="margin-top:8px">\(y' = f(x)^{g(x)}\left[g'(x)\ln f(x) + g(x)\dfrac{f'(x)}{f(x)}\right]\)</div>
       </div>
 
-      <div class="subsec" style="margin-top:14px">Interpretación geométrica</div>
-      <div class="card">
-        <div class="card-title">Recta tangente y normal en \(x_0\)</div>
-        <div class="formula-box">\(\text{tangente:}\quad y - f(x_0) = f'(x_0)(x - x_0)\)</div>
-        <div class="formula-box" style="margin-top:4px">\(\text{normal:}\quad y - f(x_0) = \dfrac{-1}{f'(x_0)}(x - x_0)\)</div>
-        <small>Si \(f'(x_0)=0\): tangente horizontal, normal vertical.</small>
+      <div class="subsec" style="margin-top:10px">Derivación implícita</div>
+      <div class="def-box" style="border-left-color:var(--v1)">
+        Cuando \(y\) no está despejada: derivar ambos lados respecto a \(x\), aplicando la regla de la cadena a los términos con \(y\) (añade \(y'\)), y despejar \(y'\).
+        <div style="background:white; border-radius:5px; padding:7px 10px; margin-top:8px; font-size:.78rem; border:1px solid #bae6fd">
+          <strong>Ejemplo:</strong> \(x^2 + y^2 = 25\)<br>
+          Derivando: \(2x + 2y\,y' = 0 \Rightarrow y' = -\dfrac{x}{y}\)
+        </div>
       </div>
     </div>
   </div>
 
-</div>
-  </div>
 </div>
 
 
@@ -637,8 +812,8 @@
     <div class="sec-title">Estudio Completo de Funciones</div>
   </div>
 
-  <div class="highlight-box" style="margin-bottom:16px">
-    <strong>Protocolo PAU:</strong> Dominio → Simetrías → Cortes con ejes → Asíntotas → Crecimiento y extremos → Concavidad e inflexión → Gráfica
+  <div class="highlight-box" style="margin-bottom:10px">
+    <strong>Pasos a seguir</strong> (no siempre necesario hacerlos todos): Dominio → Simetrías → Cortes con ejes → Asíntotas → Crecimiento y extremos → Concavidad e inflexión → Gráfica
   </div>
 
   <div class="grid-2">
@@ -653,7 +828,7 @@
         <tr><td>Función a trozos</td><td>Unión de intervalos</td></tr>
       </table>
 
-      <div class="subsec" style="margin-top:14px">Crecimiento y extremos con \(f'(x)\)</div>
+      <div class="subsec" style="margin-top:10px">Crecimiento y extremos con \(f'(x)\)</div>
       <div class="card">
         <div class="step-flow">
           <div class="step-row"><div class="step-badge" style="background:var(--v2)">1</div><div>Calcular \(f'(x)\) y resolver \(f'(x) = 0\) → puntos críticos</div></div>
@@ -665,7 +840,7 @@
         </div>
       </div>
 
-      <div class="subsec" style="margin-top:14px">Concavidad e inflexión con \(f''(x)\)</div>
+      <div class="subsec" style="margin-top:10px">Concavidad e inflexión con \(f''(x)\)</div>
       <div class="card">
         <div class="step-flow">
           <div class="step-row"><div class="step-badge" style="background:var(--v3)">1</div><div>Calcular \(f''(x)\) y resolver \(f''(x) = 0\) → candidatos a inflexión</div></div>
@@ -674,7 +849,7 @@
         </div>
       </div>
 
-      <div class="subsec" style="margin-top:14px">Optimización</div>
+      <div class="subsec" style="margin-top:10px">Optimización</div>
       <div class="def-box" style="border-left-color:var(--v2)">
         <ol class="method-steps" style="margin-left:4px">
           <li>Expresar la magnitud a maximizar/minimizar: \(f(x)\)</li>
@@ -707,8 +882,6 @@
     </div>
   </div>
 
-</div>
-  </div>
 </div>
 
 
@@ -776,20 +949,11 @@
 
   <div class="sep"></div>
 
-  <!-- Fracciones simples + Barrow -->
+  <!-- Integral definida + Barrow -->
   <div class="grid-2">
     <div>
-      <div class="subsec">Fracciones simples (racionales)</div>
-      <div class="def-box" style="border-left-color:var(--v1)">
-        Si gr(num) ≥ gr(den): dividir primero.<br><br>
-        Factorizar el denominador y descomponer:
-        $$\frac{P(x)}{(x-a)(x-b)} = \frac{A}{x-a} + \frac{B}{x-b}$$
-        Integrar cada fracción por separado: resultado con \(\ln|x-a|\).
-      </div>
-    </div>
-    <div>
       <div class="subsec">Integral definida — Regla de Barrow</div>
-      <div class="formula-box" style="font-size:1rem; padding:14px">
+      <div class="formula-box" style="font-size:.95rem; padding:10px">
         $$\int_a^b f(x)\,dx = \Big[F(x)\Big]_a^b = F(b) - F(a)$$
       </div>
       <div class="card" style="margin-top:8px">
@@ -802,9 +966,127 @@
         </ul>
       </div>
     </div>
+    <div>
+      <div class="subsec">③ Fracciones simples — procedimiento general</div>
+      <div class="def-box" style="border-left-color:var(--v4)">
+        <strong>Paso previo:</strong> si gr(num) ≥ gr(den), dividir primero y separar el cociente (polinomio integrable directamente) del resto.
+      </div>
+      <p style="font-size:.8rem; margin-top:6px">Después, descomponer la parte racional según las raíces del denominador:</p>
+      <ul class="equiv-list" style="margin-top:4px; font-size:.8rem">
+        <li>Raíces reales simples → logaritmos</li>
+        <li>Raíz real múltiple de orden \(k\) → potencias + logaritmo</li>
+        <li>Factor cuadrático irreducible → arcotangente</li>
+        <li>Numerador grado 1 sobre cuadrático irreducible → logaritmo + arcotangente</li>
+      </ul>
+    </div>
   </div>
 
 </div>
+
+
+<!-- ═══════════════════════════════════════════ 4b. INTEGRALES RACIONALES -->
+<div class="page">
+  <div class="sec-header" style="color:var(--v4)">
+    <div class="sec-num" style="background:var(--v4)">④b</div>
+    <div class="sec-title">Integración de Funciones Racionales</div>
+  </div>
+
+  <div class="highlight-box" style="margin-bottom:10px">
+    <strong>Idea general:</strong> toda integral racional \(\int\frac{P(x)}{Q(x)}\,dx\) se reduce a formas simples mediante descomposición en fracciones parciales. Si gr(P) ≥ gr(Q), dividir primero.
+  </div>
+
+  <!-- Formas simples -->
+  <div class="subsec">Formas simples (bloques fundamentales)</div>
+  <div class="grid-2" style="gap:12px; margin-bottom:14px">
+
+    <div class="method-card" style="border-left:3px solid var(--v1)">
+      <div class="method-name">Tipo Logaritmo</div>
+      <div class="card-title" style="margin-top:2px">Numerador es (múltiplo de) la derivada del denominador</div>
+      <div class="formula-box">\(\displaystyle\int\frac{k}{ax+b}\,dx = \frac{k}{a}\ln|ax+b| + C\)</div>
+      <div class="formula-box" style="margin-top:4px">\(\displaystyle\int\frac{f'(x)}{f(x)}\,dx = \ln|f(x)| + C\)</div>
+    </div>
+
+    <div class="method-card" style="border-left:3px solid var(--v3)">
+      <div class="method-name">Tipo Potencia</div>
+      <div class="card-title" style="margin-top:2px">Denominador es un binomio lineal elevado a potencia \(n > 1\)</div>
+      <div class="formula-box">\(\displaystyle\int\frac{k}{(ax+b)^n}\,dx = \frac{k}{a}\cdot\frac{(ax+b)^{-n+1}}{-n+1} + C\)</div>
+      <small>Se integra directamente como potencia, no da logaritmo.</small>
+    </div>
+
+    <div class="method-card" style="border-left:3px solid var(--v2)">
+      <div class="method-name">Tipo Arcotangente</div>
+      <div class="card-title" style="margin-top:2px">Denominador cuadrático irreducible (\(\Delta < 0\)), numerador constante</div>
+      <div class="formula-box">\(\displaystyle\int\frac{1}{x^2+a^2}\,dx = \frac{1}{a}\arctan\frac{x}{a} + C\)</div>
+      <small>Si el denominador es \(x^2+bx+c\), completar el cuadrado primero.</small>
+    </div>
+
+    <div class="method-card" style="border-left:3px solid var(--v5)">
+      <div class="method-name">Tipo Logaritmo + Arcotangente</div>
+      <div class="card-title" style="margin-top:2px">Denominador cuadrático irreducible, numerador de grado 1</div>
+      <p style="font-size:.8rem; margin:4px 0">Descomponer el numerador para obtener la derivada del denominador más un resto constante:</p>
+      <div class="formula-box" style="font-size:.78rem">\(\dfrac{Ax+B}{x^2+px+q} = \dfrac{A}{2}\cdot\dfrac{2x+p}{x^2+px+q} + \dfrac{B - \frac{Ap}{2}}{x^2+px+q}\)</div>
+      <small>Primera parte → logaritmo. Segunda parte → arcotangente (completar cuadrado si es necesario).</small>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- Caso general -->
+  <div class="subsec">Caso general — descomposición según raíces del denominador</div>
+  <p style="font-size:.8rem; color:var(--muted); margin-bottom:10px">Los casos A y B son los más habituales en PAU Extremadura.</p>
+  <div class="grid-2" style="gap:12px; margin-bottom:12px">
+
+    <div class="card" style="border-left:4px solid #ca8a04; background:var(--highlight)">
+      <div class="card-title" style="color:#92400e">⭐ Caso A — Raíces reales simples</div>
+      <p style="font-size:.82rem">\(Q(x) = (x-r_1)(x-r_2)\cdots\), raíces distintas.</p>
+      <div class="formula-box" style="margin-top:6px; font-size:.8rem; background:white">
+        \(\dfrac{P(x)}{Q(x)} = \dfrac{A}{x-r_1} + \dfrac{B}{x-r_2} + \cdots\)
+      </div>
+      <p style="font-size:.78rem; margin-top:6px; color:#78350f">Calcular \(A\), \(B\)… sustituyendo \(x = r_i\). Cada término → logaritmo.</p>
+      <div style="background:white; border-radius:6px; padding:8px 10px; margin-top:8px; font-size:.77rem; border:1px solid #fde047; line-height:1.65">
+        <strong>Ejemplo:</strong> \(I=\displaystyle\int\frac{x+3}{(x-3)(x-4)}\,dx\)<br>
+        \(\dfrac{x+3}{(x-3)(x-4)} = \dfrac{A}{x-3}+\dfrac{B}{x-4}\)<br>
+        \(x+3 = A(x-4)+B(x-3)\)<br>
+        \(x=3 \Rightarrow 6 = A\cdot(-1) \Rightarrow A=-6\)<br>
+        \(x=4 \Rightarrow 7 = B\cdot 1 \Rightarrow B=7\)<br>
+        \(I = -6\ln|x-3|+7\ln|x-4|+C\)
+      </div>
+    </div>
+
+    <div class="card" style="border-left:4px solid #ca8a04; background:var(--highlight)">
+      <div class="card-title" style="color:#92400e">⭐ Caso B — Raíz real múltiple de orden \(k\)</div>
+      <p style="font-size:.82rem">Si \(r\) es raíz de multiplicidad \(k\):</p>
+      <div class="formula-box" style="margin-top:6px; font-size:.8rem; background:white">
+        \(\dfrac{A_1}{x-r} + \dfrac{A_2}{(x-r)^2} + \cdots + \dfrac{A_k}{(x-r)^k}\)
+      </div>
+      <p style="font-size:.78rem; margin-top:6px; color:#78350f">\(A_1/(x-r)\) → logaritmo. Los demás \((x-r)^{-n}\) → potencias.</p>
+      <div style="background:white; border-radius:6px; padding:8px 10px; margin-top:8px; font-size:.77rem; border:1px solid #fde047; line-height:1.65">
+        <strong>Ejemplo:</strong> \(I=\displaystyle\int\frac{1}{x^2(x-1)}\,dx\)<br>
+        \(\dfrac{1}{x^2(x-1)} = \dfrac{A}{x}+\dfrac{B}{x^2}+\dfrac{C}{x-1}\)<br>
+        \(1 = Ax(x-1)+B(x-1)+Cx^2\)<br>
+        \(x=0 \Rightarrow 1=-B \Rightarrow B=-1\)<br>
+        \(x=1 \Rightarrow 1=C\cdot 1^2 \Rightarrow C=1\)<br>
+        \(x=2 \Rightarrow 1=2A+(-1)+4 \Rightarrow A=-1\)<br>
+        \(I = -\ln|x|+\tfrac{1}{x}+\ln|x-1|+C\)
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="gap:12px; margin-bottom:12px">
+    <div class="card" style="border-left:3px solid var(--v4)">
+      <div class="card-title" style="color:var(--v4)">Caso C — Mixto (raíces simples y múltiples)</div>
+      <p style="font-size:.82rem">Combinar los casos A y B según el tipo de cada raíz del denominador.</p>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--muted)">
+      <div class="card-title" style="color:var(--muted)">Caso D — Factor cuadrático irreducible (\(\Delta < 0\))</div>
+      <p style="font-size:.82rem">Si \(Q(x)\) contiene \(x^2+px+q\) con \(\Delta < 0\): aparece un término \(\frac{Ax+B}{x^2+px+q}\) que integra como Logaritmo + Arcotangente.</p>
+      <p style="font-size:.75rem; color:var(--muted); margin-top:5px; font-style:italic">Este caso no aparece en la PAU Extremadura.</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <strong>Protocolo completo:</strong> (1) dividir si gr(P) ≥ gr(Q) · (2) factorizar \(Q(x)\) · (3) identificar tipo de cada raíz · (4) plantear y resolver la descomposición · (5) integrar cada fracción simple
   </div>
 </div>
 
@@ -816,51 +1098,232 @@
     <div class="sec-title">Áreas y Aplicaciones de la Integral</div>
   </div>
 
-  <div class="grid-2">
+  <!-- SVGs de áreas -->
+  <div class="subsec">Situaciones habituales — esquemas</div>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-bottom:16px">
+
+    <!-- SVG 1: Área bajo curva positiva -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:6px">
+      <svg width="170" height="120" viewBox="0 0 170 120" style="border:1px solid var(--border); border-radius:8px; background:var(--formula-bg)">
+        <!-- ejes -->
+        <line x1="15" y1="105" x2="160" y2="105" stroke="#888" stroke-width="1.2"/>
+        <line x1="15" y1="10" x2="15" y2="105" stroke="#888" stroke-width="1.2"/>
+        <!-- flechas ejes -->
+        <polygon points="160,102 166,105 160,108" fill="#888"/>
+        <polygon points="12,10 15,4 18,10" fill="#888"/>
+        <!-- etiquetas eje -->
+        <text x="162" y="108" font-size="9" fill="#888">x</text>
+        <text x="8" y="8" font-size="9" fill="#888">y</text>
+        <!-- area sombreada: curva positiva sobre [a,b] -->
+        <path d="M40,105 L40,60 C60,30 110,25 130,55 L130,105 Z" fill="#bfdbfe" stroke="none"/>
+        <!-- curva -->
+        <path d="M40,60 C60,30 110,25 130,55" fill="none" stroke="#0369a1" stroke-width="2"/>
+        <!-- líneas a,b -->
+        <line x1="40" y1="105" x2="40" y2="60" stroke="#0369a1" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="130" y1="105" x2="130" y2="55" stroke="#0369a1" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="37" y="113" font-size="9" fill="#0369a1">a</text>
+        <text x="127" y="113" font-size="9" fill="#0369a1">b</text>
+        <!-- A -->
+        <text x="80" y="85" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">A</text>
+      </svg>
+      <div style="font-size:.68rem; color:var(--muted); text-align:center; max-width:160px"><strong>Caso 1:</strong> \(f(x) \geq 0\) en \([a,b]\)<br>\(A = \int_a^b f(x)\,dx\)</div>
+    </div>
+
+    <!-- SVG 2: Área con cambio de signo -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:6px">
+      <svg width="170" height="120" viewBox="0 0 170 120" style="border:1px solid var(--border); border-radius:8px; background:var(--formula-bg)">
+        <line x1="15" y1="70" x2="160" y2="70" stroke="#888" stroke-width="1.2"/>
+        <line x1="15" y1="10" x2="15" y2="115" stroke="#888" stroke-width="1.2"/>
+        <polygon points="160,67 166,70 160,73" fill="#888"/>
+        <polygon points="12,10 15,4 18,10" fill="#888"/>
+        <text x="162" y="73" font-size="9" fill="#888">x</text>
+        <text x="8" y="8" font-size="9" fill="#888">y</text>
+        <!-- zona positiva a-c -->
+        <path d="M30,70 L30,40 C50,20 75,25 90,70 Z" fill="#bfdbfe" stroke="none"/>
+        <!-- zona negativa c-b -->
+        <path d="M90,70 C105,110 130,110 145,70 Z" fill="#fee2e2" stroke="none"/>
+        <!-- curva -->
+        <path d="M30,40 C50,20 75,25 90,70 C105,110 130,110 145,70" fill="none" stroke="#0369a1" stroke-width="2"/>
+        <line x1="30" y1="70" x2="30" y2="40" stroke="#0369a1" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="145" y1="70" x2="145" y2="70" stroke="#0369a1" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="27" y="78" font-size="9" fill="#0369a1">a</text>
+        <text x="87" y="78" font-size="9" fill="#6b6860">c</text>
+        <text x="142" y="78" font-size="9" fill="#0369a1">b</text>
+        <text x="55" y="58" font-size="10" font-weight="bold" fill="#0369a1" text-anchor="middle">A₁</text>
+        <text x="118" y="95" font-size="10" font-weight="bold" fill="#dc2626" text-anchor="middle">A₂</text>
+      </svg>
+      <div style="font-size:.68rem; color:var(--muted); text-align:center; max-width:160px"><strong>Caso 2:</strong> \(f\) cambia de signo en \(c\)<br>\(A = A_1 + A_2\) (sumar valores absolutos)</div>
+    </div>
+
+    <!-- SVG 3: Área entre dos curvas sin cruce -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:6px">
+      <svg width="170" height="120" viewBox="0 0 170 120" style="border:1px solid var(--border); border-radius:8px; background:var(--formula-bg)">
+        <line x1="15" y1="105" x2="160" y2="105" stroke="#888" stroke-width="1.2"/>
+        <line x1="15" y1="10" x2="15" y2="105" stroke="#888" stroke-width="1.2"/>
+        <polygon points="160,102 166,105 160,108" fill="#888"/>
+        <polygon points="12,10 15,4 18,10" fill="#888"/>
+        <text x="162" y="108" font-size="9" fill="#888">x</text>
+        <text x="8" y="8" font-size="9" fill="#888">y</text>
+        <!-- zona entre curvas -->
+        <path d="M35,75 C60,50 100,45 135,65 L135,85 C100,70 60,78 35,95 Z" fill="#d1fae5" stroke="none"/>
+        <!-- curva f (superior) -->
+        <path d="M35,75 C60,50 100,45 135,65" fill="none" stroke="#059669" stroke-width="2"/>
+        <!-- curva g (inferior) -->
+        <path d="M35,95 C60,78 100,70 135,85" fill="none" stroke="#d97706" stroke-width="2"/>
+        <line x1="35" y1="75" x2="35" y2="95" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="135" y1="65" x2="135" y2="85" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="32" y="113" font-size="9" fill="#888">a</text>
+        <text x="132" y="113" font-size="9" fill="#888">b</text>
+        <text x="155" y="62" font-size="9" fill="#059669">f</text>
+        <text x="155" y="82" font-size="9" fill="#d97706">g</text>
+        <text x="85" y="72" font-size="10" font-weight="bold" fill="#059669" text-anchor="middle">A</text>
+      </svg>
+      <div style="font-size:.68rem; color:var(--muted); text-align:center; max-width:160px"><strong>Caso 3:</strong> \(f(x) \geq g(x)\) en \([a,b]\)<br>\(A = \int_a^b[f-g]\,dx\)</div>
+    </div>
+
+    <!-- SVG 4: Área entre dos curvas con cruce real en c -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:6px">
+      <svg width="170" height="120" viewBox="0 0 170 120" style="border:1px solid var(--border); border-radius:8px; background:var(--formula-bg)">
+        <line x1="15" y1="105" x2="160" y2="105" stroke="#888" stroke-width="1.2"/>
+        <line x1="15" y1="10" x2="15" y2="105" stroke="#888" stroke-width="1.2"/>
+        <polygon points="160,102 166,105 160,108" fill="#888"/>
+        <polygon points="12,10 15,4 18,10" fill="#888"/>
+        <text x="162" y="108" font-size="9" fill="#888">x</text>
+        <text x="8" y="8" font-size="9" fill="#888">y</text>
+        <!-- Las curvas f y g se cortan exactamente en x=25 (a) y x=95 (c) y x=145 (b) -->
+        <!-- f: parábola cóncava · g: recta inclinada · se cortan en a, c, b -->
+        <!-- zona 1: f>g [a,c], verde -->
+        <path d="M25,80 C45,35 75,30 95,68 L95,68 C75,55 45,62 25,80 Z" fill="#d1fae5" stroke="none"/>
+        <!-- zona 2: g>f [c,b], amarillo -->
+        <path d="M95,68 C112,82 130,90 145,80 L145,55 C130,68 112,58 95,68 Z" fill="#fef3c7" stroke="none"/>
+        <!-- curva f (arco, mayor al principio) -->
+        <path d="M25,80 C45,35 75,30 95,68 C112,82 130,90 145,80" fill="none" stroke="#059669" stroke-width="2"/>
+        <!-- curva g (arco, mayor al final) -->
+        <path d="M25,80 C45,62 75,55 95,68 C112,58 130,68 145,55" fill="none" stroke="#d97706" stroke-width="2"/>
+        <!-- marcas a, c, b -->
+        <line x1="25" y1="80" x2="25" y2="105" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="95" y1="68" x2="95" y2="105" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="145" y1="55" x2="145" y2="105" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+        <!-- punto de cruce en c -->
+        <circle cx="95" cy="68" r="3" fill="#444"/>
+        <text x="22" y="113" font-size="9" fill="#888">a</text>
+        <text x="92" y="113" font-size="9" fill="#444">c</text>
+        <text x="142" y="113" font-size="9" fill="#888">b</text>
+        <text x="56" y="53" font-size="10" font-weight="bold" fill="#059669" text-anchor="middle">A₁</text>
+        <text x="122" y="82" font-size="10" font-weight="bold" fill="#d97706" text-anchor="middle">A₂</text>
+        <text x="148" y="78" font-size="9" fill="#059669">f</text>
+        <text x="148" y="53" font-size="9" fill="#d97706">g</text>
+      </svg>
+      <div style="font-size:.68rem; color:var(--muted); text-align:center; max-width:160px"><strong>Caso 4:</strong> curvas se cortan en \(c\)<br>Calcular \(A_1 + A_2\) por tramos</div>
+    </div>
+
+  </div>
+
+  <!-- Fórmulas áreas + volumen en una línea compacta de 3 columnas -->
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:14px">
+
     <div>
       <div class="subsec">Área bajo una curva</div>
-      <div class="def-box" style="border-left-color:var(--v5)">
-        Si \(f(x) \geq 0\) en \([a,b]\):
+      <div class="def-box" style="border-left-color:var(--v5); padding:10px 12px">
+        \(f(x) \geq 0\):
         $$A = \int_a^b f(x)\,dx$$
-        Si \(f\) cambia de signo: <strong>dividir el intervalo</strong> en los ceros y sumar los valores absolutos:
+        \(f\) cambia de signo en \(c\):
         $$A = \left|\int_a^c f\right| + \left|\int_c^b f\right|$$
-      </div>
-
-      <div class="subsec" style="margin-top:14px">Área entre dos curvas</div>
-      <div class="def-box" style="border-left-color:var(--v4)">
-        Si \(f(x) \geq g(x)\) en \([a,b]\):
-        $$A = \int_a^b [f(x) - g(x)]\,dx$$
-        Los límites \(a\), \(b\) se obtienen igualando \(f(x) = g(x)\).
-      </div>
-      <div class="highlight-box" style="margin-top:8px">
-        ⚠️ Si las curvas se cruzan en el interior, calcular por tramos y estudiar qué función está por encima en cada tramo para realizar la resta en el orden adecuado.
       </div>
     </div>
 
     <div>
-      <div class="subsec">Volumen de revolución (alrededor del eje X)</div>
-      <div class="formula-box" style="font-size:1rem; padding:12px">
-        $$V = \pi\int_a^b [f(x)]^2\,dx$$
+      <div class="subsec">Área entre dos curvas</div>
+      <div class="def-box" style="border-left-color:var(--v4); padding:10px 12px">
+        \(f(x) \geq g(x)\) en \([a,b]\):
+        $$A = \int_a^b [f(x) - g(x)]\,dx$$
+        <small>Los límites \(a\), \(b\) se obtienen igualando \(f=g\).</small>
       </div>
-      <div class="card" style="margin-top:8px">
-        <div class="card-title">Si se gira el área entre dos curvas</div>
-        <div class="formula-box">\(V = \pi\displaystyle\int_a^b \left([f(x)]^2 - [g(x)]^2\right)dx\)</div>
-        <small>Con \(f(x) \geq g(x) \geq 0\) en \([a,b]\).</small>
+      <div class="highlight-box" style="margin-top:6px; font-size:.76rem; padding:7px 10px">
+        ⚠️ Si las curvas se cortan, calcular por tramos con la resta en el orden adecuado.
       </div>
+    </div>
 
-      <div class="subsec" style="margin-top:14px">Función primitiva con condición inicial</div>
+    <div>
+      <div class="subsec">Volumen de revolución</div>
+      <!-- SVG 3D sólido de revolución mejorado -->
+      <svg width="100%" height="110" viewBox="0 0 200 110" style="display:block; border:1px solid var(--border); border-radius:8px; background:var(--formula-bg); margin-bottom:6px">
+        <defs>
+          <!-- gradiente radial para efecto 3D en las elipses -->
+          <radialGradient id="grad3d" cx="40%" cy="35%" r="60%">
+            <stop offset="0%" stop-color="#93c5fd" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.5"/>
+          </radialGradient>
+          <radialGradient id="gradEnd" cx="45%" cy="40%" r="55%">
+            <stop offset="0%" stop-color="#bfdbfe" stop-opacity="0.95"/>
+            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.6"/>
+          </radialGradient>
+        </defs>
+        <!-- eje x central -->
+        <line x1="12" y1="55" x2="190" y2="55" stroke="#888" stroke-width="1.2"/>
+        <polygon points="190,52 196,55 190,58" fill="#888"/>
+        <text x="192" y="58" font-size="8" fill="#888">x</text>
+        <!-- sólido 3D: cuerpo lateral sombreado -->
+        <!-- cara superior: curva f(x) desde a hasta b -->
+        <path d="M45,55 C58,22 120,16 158,30" fill="none" stroke="#1d4ed8" stroke-width="2"/>
+        <!-- cara inferior (espejo, oculta) -->
+        <path d="M45,55 C58,88 120,94 158,80" fill="none" stroke="#1d4ed8" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <!-- relleno lateral del sólido -->
+        <path d="M45,55 C58,22 120,16 158,30
+                 C158,30 158,30 158,30
+                 L158,80
+                 C120,94 58,88 45,55 Z"
+              fill="url(#grad3d)" fill-opacity="0.55" stroke="none"/>
+        <!-- elipse de cierre izquierda (cara delantera del disco en a) — pequeña pues f(a)=0 -->
+        <ellipse cx="45" cy="55" rx="2" ry="2" fill="#1d4ed8" fill-opacity="0.7"/>
+        <!-- elipse de cierre derecha (cara delantera del disco en b) — radio=25 -->
+        <ellipse cx="158" cy="55" rx="6" ry="25" fill="url(#gradEnd)" stroke="#1d4ed8" stroke-width="1.2"/>
+        <!-- sombra inferior del sólido -->
+        <path d="M45,55 C58,88 120,94 158,80" fill="none" stroke="#1d4ed8" stroke-width="1.2" stroke-dasharray="4,3"/>
+        <!-- líneas verticales a y b -->
+        <line x1="45" y1="42" x2="45" y2="68" stroke="#0369a1" stroke-width="1" stroke-dasharray="3,2"/>
+        <line x1="158" y1="30" x2="158" y2="80" stroke="#0369a1" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="42" y="103" font-size="8" fill="#0369a1">a</text>
+        <text x="155" y="103" font-size="8" fill="#0369a1">b</text>
+        <!-- etiqueta f(x) -->
+        <text x="95" y="28" font-size="8" fill="#1d4ed8">f(x)</text>
+        <!-- radio r en b -->
+        <line x1="158" y1="55" x2="158" y2="30" stroke="#dc2626" stroke-width="1.2"/>
+        <text x="160" y="44" font-size="7" fill="#dc2626">r=f(b)</text>
+        <!-- eje y -->
+        <line x1="12" y1="95" x2="12" y2="8" stroke="#888" stroke-width="1.2"/>
+        <polygon points="9,8 12,3 15,8" fill="#888"/>
+        <text x="5" y="7" font-size="8" fill="#888">y</text>
+        <!-- flecha rotación -->
+        <path d="M170,38 Q182,55 170,72" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+        <polygon points="170,72 167,79 174,74" fill="#dc2626"/>
+        <text x="173" y="57" font-size="7.5" fill="#dc2626">360°</text>
+      </svg>
+      <div class="formula-box" style="font-size:.88rem; padding:7px 10px">\(V = \pi\displaystyle\int_a^b [f(x)]^2\,dx\)</div>
+      <div class="card" style="margin-top:6px; padding:7px 10px">
+        <div class="card-title" style="font-size:.76rem">Entre dos curvas (\(f \geq g \geq 0\))</div>
+        <div class="formula-box" style="font-size:.78rem; padding:5px 8px">\(V = \pi\displaystyle\int_a^b\!\left([f]^2 - [g]^2\right)dx\)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fila inferior: primitiva con condición + protocolo áreas -->
+  <div class="grid-2" style="gap:10px">
+    <div>
+      <div class="subsec">Función primitiva con condición inicial</div>
       <div class="def-box" style="border-left-color:var(--v3)">
         Si \(G'(x) = f(x)\) y se conoce \(G(a) = k\):
         $$G(x) = \int f(x)\,dx + C, \quad C = k - F(a)$$
-        Es decir: integrar, sustituir el punto dado y despejar \(C\).
+        Integrar, sustituir el punto dado y despejar \(C\).
       </div>
-
-      <div class="subsec" style="margin-top:14px">Protocolo general PAU — áreas</div>
+    </div>
+    <div>
+      <div class="subsec">Protocolo para cálculo de áreas</div>
       <div class="step-flow">
         <div class="step-row"><div class="step-badge" style="background:var(--v5)">1</div><div>Identificar las curvas y bosquejar el recinto</div></div>
-        <div class="step-row"><div class="step-badge" style="background:var(--v5)">2</div><div>Calcular los puntos de corte: \(f(x)=g(x)\)</div></div>
-        <div class="step-row"><div class="step-badge" style="background:var(--v5)">3</div><div>Determinar qué curva queda por encima en cada tramo</div></div>
-        <div class="step-row"><div class="step-badge" style="background:var(--v5)">4</div><div>Integrar en cada tramo (decidiendo en qué orden restar, para que los resultados sean positivos) y sumar los resultados de cada integral</div></div>
+        <div class="step-row"><div class="step-badge" style="background:var(--v5)">2</div><div>Calcular puntos de corte: \(f(x)=g(x)\)</div></div>
+        <div class="step-row"><div class="step-badge" style="background:var(--v5)">3</div><div>Ver qué curva queda por encima en cada tramo</div></div>
+        <div class="step-row"><div class="step-badge" style="background:var(--v5)">4</div><div>Integrar por tramos (orden de resta correcto para resultados positivos) y sumar</div></div>
       </div>
     </div>
   </div>
@@ -876,7 +1339,7 @@
         <div id="qr-geogebra-body" style="flex-shrink:0; background:white; border-radius:6px; padding:3px; width:72px; height:72px; display:flex; align-items:center; justify-content:center; border:1px solid var(--border)"></div>
         <div>
           <div style="font-weight:700; font-size:.9rem; margin-bottom:4px">📐 GeoGebra — Calculadora de funciones</div>
-          <div style="font-size:.78rem; color:var(--muted); margin-bottom:6px">Estudia cualquier función: dominio, derivadas, integrales, áreas</div>
+          <div style="font-size:.78rem; color:var(--muted); margin-bottom:6px">Estudia cualquier función</div>
           <a href="https://www.geogebra.org/m/p2vqhen2" target="_blank" style="font-size:.72rem; color:#0284c7; font-family:monospace; text-decoration:underline">geogebra.org/m/p2vqhen2</a>
         </div>
       </div>
